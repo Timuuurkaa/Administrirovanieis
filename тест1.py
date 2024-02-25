@@ -1,13 +1,17 @@
-from лаба1 import init, fill, show, db
+from лаба1 import init, fill, show, db, ORDERS, CLIENTS
+from peewee import *
+from os.path import exists
 
 def test_init():
     db.connect()
     init()
+    assert exists("база1.db")
     db.close()
 
 def test_init_second_time():
     db.connect()
     init()
+    assert exists("база1.db")
     db.close()
 
 def test_show_empty():
@@ -20,6 +24,7 @@ def test_fill():
     db.connect()
     for i in range(25):
         fill()
+    assert CLIENTS.select().count() >= 10
     db.close()
 
 def test_show():
