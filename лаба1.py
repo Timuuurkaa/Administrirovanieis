@@ -1,4 +1,4 @@
-from peewee import *
+from peewee import *    
 import argparse
 
 db = SqliteDatabase("база1.db")
@@ -150,10 +150,14 @@ def show(tablename):
         )
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(usage=argparse.SUPPRESS)
     parser.add_argument("parametr", help="Параметр, что необходимо сделать, возможные значения: init, fill, show")
     parser.add_argument("tablename", nargs="?", default="")
-    args = parser.parse_args()
+    try:
+        args = parser.parse_args()
+    except SystemExit:
+        print("Использование: python лаба1.py init/fill/show [tablename]\n\ninit инициализирует базу данных\nfill заполняет базу данных случайными данными\nshow [tablename] показывает таблицу из базы данных")
+        quit(1)
     parametr = args.parametr.lower()
     tablename = args.tablename.lower()
     if parametr not in ("init", "fill", "show"):
