@@ -14,7 +14,9 @@ pipeline {
         stage("Build and test") {
             steps {
                 sh "pip3 install peewee pytest"
-		sh "python3 -m pytest ./Administrirovanieis/тест1.py"
+		sh "ls"
+		sh "git clone https://github.com/Timuuurkaa/Administrirovanieis.git"
+		sh "python3 -m pytest Administrirovanieis/тест1.py"
             }
         }
     }
